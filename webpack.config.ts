@@ -24,6 +24,10 @@ module.exports = (env: EnvVariables) => {
             rules: getLoaders()
         },
         resolve: {
+            alias: {
+                root: __dirname,
+                profiles: path.resolve(__dirname, 'src/profiles'),
+            },
             extensions: ['.tsx', '.ts', '.js']
         },
     }
