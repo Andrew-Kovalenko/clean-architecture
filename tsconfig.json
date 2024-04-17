@@ -4,17 +4,27 @@
     "baseUrl": "src",
     "noImplicitAny": true,
     "module": "ESNext",
-    "target": "es5",
+    "target": "es2017",
     "jsx": "react-jsx",
     "allowJs": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
+    "plugins": [
+      {
+        "name": "@clawject/language-service",
+        "transform": "@clawject/di/transformer" },
+      {
+        "transform": "@clawject/di/transformer/metadata",
+        "afterDeclarations": true
+      },
+    ]
   },
   "include": ["src"],
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS"
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext",
     }
   }
 }

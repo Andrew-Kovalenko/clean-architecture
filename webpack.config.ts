@@ -5,6 +5,7 @@ import {ENV_MODE, EnvVariables} from './config/webpack/types'
 import {getDevServer} from './config/webpack/getDevServer'
 import {getLoaders} from './config/webpack/getLoaders'
 import {getPlugins} from './config/webpack/getPlugins'
+import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 
 module.exports = (env: EnvVariables) => {
     const isDev = env.mode === ENV_MODE.DEVELOPMENT
@@ -24,11 +25,12 @@ module.exports = (env: EnvVariables) => {
             rules: getLoaders()
         },
         resolve: {
-            alias: {
-                root: __dirname,
-                profiles: path.resolve(__dirname, 'src/profiles'),
-            },
-            extensions: ['.tsx', '.ts', '.js']
+            extensions: ['.tsx', '.ts', '.js'],
+            plugins: [
+                new TsconfigPathsPlugin({
+                    extensions: ['.js', '.jsx', '.ts', '.tsx', '.mjs', '.json'],
+                }),
+            ],
         },
     }
 

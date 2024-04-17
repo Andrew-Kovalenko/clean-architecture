@@ -1,31 +1,18 @@
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { ModuleOptions } from "webpack";
+import { ModuleOptions } from 'webpack'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-// export const getLoaders = (): ModuleOptions["rules"] => {
-//     return [
-//         {
-//             test: /\.css$/i,
-//             use: [MiniCssExtractPlugin.loader, "css-loader"],
-//         },
-//         {
-//             test: /\.tsx?$/,
-//             use: 'ts-loader',
-//             exclude: /node_modules/,
-//         },
-//     ]
-// }
-
-
-export function getLoaders(): ModuleOptions["rules"] {
+export const getLoaders = (): ModuleOptions["rules"] => {
     return [
         {
             test: /\.css$/i,
-            use: ["style-loader", "css-loader"],
+            use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
         {
-            test: /\.tsx?$/,
-            use: 'ts-loader',
-            exclude: /node_modules/,
+            loader: 'ts-loader',
+            test: /\.(ts|tsx)$/,
+            options: {
+                compiler: 'ts-patch/compiler',
+            },
         },
     ]
 }

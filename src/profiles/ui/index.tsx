@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { RestProfileRepository } from 'profiles/repository/get/RestProfileRepository'
 import { Profile } from 'profiles/application/models/Profile'
+import { connect } from 'profiles/ui/connect/connector'
+import { IProfileContext } from 'profiles/ui/connect/IProfileContext'
 
-const Profiles = () => {
-    const repository = new RestProfileRepository()
-
+const ProfilesList = (props: IProfileContext) => {
     const [profiles, setProfiles] = useState<Profile[]>([])
 
     useEffect(() => {
         async function getProfiles() {
-            const profiles = await repository.get()
-
+            const profiles = await props.repository.get();
+            console.log('profiles', profiles)
             setProfiles(profiles)
         }
 
         getProfiles();
-    },[])
+    },[props.repository])
 
 
     return (
@@ -28,4 +27,4 @@ const Profiles = () => {
     )
 }
 
-export default Profiles
+export default connect(ProfilesList)
