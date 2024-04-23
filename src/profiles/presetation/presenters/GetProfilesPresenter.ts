@@ -1,11 +1,10 @@
 import { RestProfileRepository } from 'profiles/repository/RestProfileRepository'
-import { ListView } from 'profiles/presetation/ports/ListView'
-import { Profile } from 'profiles/application/models/Profile'
+import { ProfilesView } from 'profiles/presetation/ports/ProfilesView'
 
 export class GetProfilesPresenter {
     constructor(
         private profileRepository: RestProfileRepository,
-        private profileView: ListView<Profile[]>
+        private profileView: ProfilesView
     ) {}
 
     async get() {
@@ -19,7 +18,7 @@ export class GetProfilesPresenter {
 
             const response = await this.profileRepository.get()
 
-            this.profileView.setItems(response)
+            this.profileView.setProfiles(response)
         } catch (error) {
             console.log('error', error)
         } finally {

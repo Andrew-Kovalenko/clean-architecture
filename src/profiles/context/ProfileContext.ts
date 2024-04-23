@@ -6,6 +6,8 @@ import { GetProfilesPresenter } from 'profiles/presetation/presenters/GetProfile
 import { MockProfilesAPI } from 'mock-api/MockProfilesAPI'
 import { MockJobStatisticAPI } from 'mock-api/MockJobStatisticAPI'
 import { RestJobStatisticRepository } from 'profiles/repository/RestJobStatisticRepository'
+import { SalariesUseCase } from 'profiles/application/use-cases/SalariesUseCase'
+import { CalculateSalariesPresenter } from 'profiles/presetation/presenters/CalculateSalariesPresenter'
 
 
 @ClawjectApplication()
@@ -16,7 +18,10 @@ export class ProfileContext {
     restProfileRepository = Bean(RestProfileRepository)
     restJobStatisticRepository = Bean(RestJobStatisticRepository)
 
+    salariesUseCase = Bean(SalariesUseCase)
+
     getProfilesPresenter = Bean(GetProfilesPresenter)
+    calculateSalariesPresenter = Bean(CalculateSalariesPresenter)
 
     profilesView = Bean(ProfilesMobxView)
 

@@ -2,13 +2,16 @@ import React, { useEffect } from 'react'
 import { connect } from 'profiles/ui/connect/connector'
 import { IProfileContext } from 'profiles/ui/connect/IProfileContext'
 
-const ProfilesList = (props: IProfileContext) => {
+const ProfilesList = ({
+    profilesPresenter,
+    calculateSalariesPresenter,
+    profilesView,
+}: IProfileContext) => {
     useEffect(() => {
-        props.profilesPresenter.get()
+        profilesPresenter.get()
+    }, [])
 
-    },[props.repository])
-
-    if (props.profilesView.isLoading) {
+    if (profilesView.isLoading) {
         return <h2>LOADING</h2>
     }
 
@@ -16,10 +19,20 @@ const ProfilesList = (props: IProfileContext) => {
         <div>
             Profiles
             <ul>
-                {props.profilesView.items.map(profile => (
-                    <li key={profile.id}>{profile.name}</li>
-                ))}
+                {profilesView.profiles.map(profile => {
+                    const salary = profilesView.salaries.find(it.profileId === profile.id)
+
+                    return (
+                        <li key={profile.id}>
+                            {profile.name}
+                            {salary && <h4>salary: </h4>}
+                        </li>
+                    )
+                })}
             </ul>
+            <button onClick={calculateSalariesPresenter.calculate}>
+                Calculate salaries
+            </button>
         </div>
     )
 }
