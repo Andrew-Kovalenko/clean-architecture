@@ -1,21 +1,54 @@
 {
-    "posts": [
-        { "id": 1, "title": "Post 1" },
-        { "id": 2, "title": "Post 2" },
-        { "id": 3, "title": "Post 3" }
-    ],
-    "comments": [
-        { "id": 1, "body": "some comment", "postId": 1 },
-        { "id": 2, "body": "some comment", "postId": 1 }
+    "job-statistic": [
+        {
+            "profileId": "id1",
+            "workedHoursAmount": 120,
+            "availableVacationAmount": 0,
+            "usedPaidVacationAmount": 2,
+            "averageEfficient": 0.60
+        },
+        {
+            "profileId": "id2",
+            "workedHoursAmount": 110,
+            "availableVacationAmount": 5,
+            "usedPaidVacationAmount": 0,
+            "averageEfficient": 0.75
+        },
+        {
+            "profileId": "id3",
+            "workedHoursAmount": 140,
+            "availableVacationAmount": 10,
+            "usedPaidVacationAmount": 0,
+            "averageEfficient": 0.50
+        },
+        {
+            "profileId": "id4",
+            "workedHoursAmount": 100,
+            "availableVacationAmount": 4,
+            "usedPaidVacationAmount": 0,
+            "averageEfficient": 0.9
+        }
     ],
     "profiles": [
         {
-            "id": "1",
-            "name": "Andrew"
+            "id": "id1",
+            "name": "John",
+            "role": "JUNIOR"
         },
         {
-            "id": "2",
-            "name": "Ben"
+            "id": "id2",
+            "name": "John",
+            "role": "JUNIOR"
+        },
+        {
+            "id": "id3",
+            "name": "Ben",
+            "role": "SENIOR"
+        },
+        {
+            "id": "id4",
+            "name": "Sara",
+            "role": "MIDDLE"
         }
     ]
 }
