@@ -1,15 +1,22 @@
 import axios from 'axios';
 import { Profile } from 'profiles/application/models/Profile'
 import { ProfilesRepository } from 'profiles/application/_ports/ProfilesRepository'
+import { MockProfilesAPI } from 'mock-api/MockProfilesAPI'
 
 const baseUrl = 'https://my-json-server.typicode.com/Andrew-Kovalenko/clean-architecture'
 
 export class RestProfileRepository implements ProfilesRepository {
-    async get(): Promise<Profile[]> {
-        const response = axios.get<Profile[]>(`${baseUrl}/profiles`)
-            .then(response => response.data)
+    constructor(
+        private mockProfilesAPI: MockProfilesAPI
+    ) {}
 
-        return response;
+    async get(): Promise<Profile[]> {
+        // const response = axios.get<Profile[]>(`${baseUrl}/profiles`)
+        //     .then(response => response.data)
+        //
+        // return response;
+
+        return this.mockProfilesAPI.getProfiles()
     }
 
     async create(profile: Profile): Promise<void> {
