@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'profiles/ui/connect/connector'
 import { IProfileContext } from 'profiles/ui/connect/IProfileContext'
+import './styles.css'
 
 const ProfilesList = ({
     profilesPresenter,
@@ -12,24 +13,36 @@ const ProfilesList = ({
     }, [])
 
     if (profilesView.isLoading) {
-        return <h2>LOADING</h2>
+        return <h2>---LOADING---</h2>
     }
 
     return (
         <div>
-            Profiles
-            <ul>
+            <h3>EMPLOYEES</h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        Profiles
+                    </th>
+                    <th>
+                        Salaries
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
                 {profilesView.profiles.map(profile => {
-                    const salary = profilesView.salaries.find(it.profileId === profile.id)
+                    const salary = profilesView.getSalaryByProfile(profile.id)
 
                     return (
-                        <li key={profile.id}>
-                            {profile.name}
-                            {salary && <h4>salary: </h4>}
-                        </li>
+                        <tr key={profile.id}>
+                            <td>{profile.name}</td>
+                            <td>{`${salary}`}</td>
+                        </tr>
                     )
                 })}
-            </ul>
+                </tbody>
+            </table>
             <button onClick={calculateSalariesPresenter.calculate}>
                 Calculate salaries
             </button>

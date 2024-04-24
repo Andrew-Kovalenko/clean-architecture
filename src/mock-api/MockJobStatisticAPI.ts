@@ -1,6 +1,6 @@
 /* eslint-disable */
 export class MockJobStatisticAPI {
-    private jobStatistic: [
+    private jobStatistic = [
         {
             "profileId": "id1",
             "workedHoursAmount": 120,

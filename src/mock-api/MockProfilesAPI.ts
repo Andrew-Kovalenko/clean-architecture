@@ -3,7 +3,7 @@ export class MockProfilesAPI {
     private profiles = [
         {
         'id': 'id1',
-        'name': 'John',
+        'name': 'Tarzan',
         'role': 'JUNIOR',
         },
         {

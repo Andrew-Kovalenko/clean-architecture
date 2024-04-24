@@ -6,7 +6,11 @@ import { SalaryInfo } from 'profiles/application/models/SalaryInfo'
 export class ProfilesMobxView implements ProfilesView {
     @observable accessor profiles: Profile[] = []
 
-    @observable accessor salaries: SalaryInfo[] = []
+    @observable accessor salariesMap: Map<string, number> = new Map<string, number>()
+
+    getSalaryByProfile(profileId: string): number | string {
+        return this.salariesMap.get(profileId) ?? '-'
+    }
 
     @observable accessor isLoading = false
 
@@ -22,6 +26,6 @@ export class ProfilesMobxView implements ProfilesView {
 
     @action
     setSalaries(salaries: SalaryInfo[]) {
-       this.salaries = salaries
+        salaries.map(it => this.salariesMap.set(it.profileId, it.amount))
     }
 }

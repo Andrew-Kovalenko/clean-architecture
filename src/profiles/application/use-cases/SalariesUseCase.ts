@@ -18,10 +18,16 @@ export class SalariesUseCase {
     async calculateSalaries(): Promise<SalaryInfo[]> {
         const statistics = await this.restJobStatisticRepository.get()
         const profiles = await this.restProfileRepository.get()
+        console.log('statistics', statistics)
+        console.log('profiles', profiles)
 
 
         const salaryInfo: SalaryInfo[] = profiles.map(profile => {
-            const profileStatistic = statistics.find(it => it.profileId === profile.id)
+            const profileStatistic = statistics?.find(it => it.profileId === profile.id)
+            if (!profileStatistic) {
+                console.log('error, profileStatistic - ', profileStatistic)
+                return
+            }
 
             return {
                 profileId: profile.id,
