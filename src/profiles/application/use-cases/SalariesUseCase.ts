@@ -1,7 +1,7 @@
-import { RestJobStatisticRepository } from 'profiles/repository/RestJobStatisticRepository'
 import { ProfileRole } from 'profiles/application/models/ProfileRole'
-import { RestProfileRepository } from 'profiles/repository/RestProfileRepository'
 import { SalaryInfo } from 'profiles/application/models/SalaryInfo'
+import { ProfilesRepository } from 'profiles/application/_ports/ProfilesRepository'
+import { JobStatisticRepository } from 'profiles/application/_ports/JobStatisticRepository'
 
 const hourRateByRole: Record<ProfileRole, number> = {
     [ProfileRole.JUNIOR]: 100,
@@ -11,16 +11,13 @@ const hourRateByRole: Record<ProfileRole, number> = {
 
 export class SalariesUseCase {
     constructor(
-        private restProfileRepository: RestProfileRepository,
-        private restJobStatisticRepository: RestJobStatisticRepository,
+        private restProfileRepository: ProfilesRepository,
+        private restJobStatisticRepository: JobStatisticRepository,
     ) {}
 
     async calculateSalaries(): Promise<SalaryInfo[]> {
         const statistics = await this.restJobStatisticRepository.get()
         const profiles = await this.restProfileRepository.get()
-        console.log('statistics', statistics)
-        console.log('profiles', profiles)
-
 
         const salaryInfo: SalaryInfo[] = profiles.map(profile => {
             const profileStatistic = statistics?.find(it => it.profileId === profile.id)
